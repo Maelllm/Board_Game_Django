@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from board_game.models import *  # NOQA
+
+admin.site.register([Game, Publisher, Series, Order, OrderItem, AgeCategory, TimeCategory, PLayerCountCategory])
