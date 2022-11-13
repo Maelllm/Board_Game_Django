@@ -69,4 +69,4 @@ class GameSerializer(ModelSerializer):
 
     class Meta:
         model = Game
-        fields = "__all__"
+        fields = ("name", "price", "language", "description", "time_spend", "age_category", "player_count", "series")
