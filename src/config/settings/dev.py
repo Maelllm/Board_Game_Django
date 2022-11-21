@@ -32,11 +32,11 @@ else:
         #     "PORT": os.environ.get("POSTGRES_PORT"),
         # },
         # "default": {
-        #         "ENGINE": "django.db.backends.postgresql",
-        #         "NAME": "lyamets",
-        #         "USER": "postgres",
-        #         "PASSWORD": "postgres",
-        #         "HOST": "localhost",
-        #         "PORT": "5433",
-        #     }
+        #     "ENGINE": "django.db.backends.postgresql",
+        #     "NAME": "lyamets",
+        #     "USER": "postgres",
+        #     "PASSWORD": "postgres",
+        #     "HOST": "localhost",
+        #     "PORT": "5433",
+        # }
     }
