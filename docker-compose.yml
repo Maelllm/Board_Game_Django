@@ -6,10 +6,12 @@ services:
     container_name: bgd_cont
     working_dir: /Board_Game_Django
     command:
-      - ./commands/start_server.sh
+      - ./commands/start_server_${MODE}.sh
     ports:
-      - 8010:8008
+      - ${LOCAL_PORT}:${WSGI_PORT}
     volumes:
+      - static_content:/Board_Game_Django/src/static
+      - media_content:/Board_Game_Django/src/media
       - ./src:/Board_Game_Django/src
     env_file:
       - .env
@@ -62,9 +64,24 @@ services:
     depends_on:
       - mongo
 
+  nginx:
+    image: nginx:1.19
+    volumes:
+      - static_content:/Board_Game_Django/src/static
+      - media_content:/Board_Game_Django/src/media
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
+    depends_on:
+      - backend
 
 
 volumes:
   pg_data: { }
   pgadmin_data: { }
   mongo_data: { }
+  static_content: { }
+  media_content: { }

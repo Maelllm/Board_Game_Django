@@ -156,7 +156,7 @@
 						<li class="active"><a href="{% url 'core:index' %}">Home</a></li>
 						<li><a href="{% url 'board_game:all_games' %}">All games</a></li>
 						<li><a href="{% url 'board_game:publishers' %}">Pusblishers</a></li>
-						<li><a href="{% url 'board_game:series' %}">Series</a></li>
+						<li><a href="#">Series</a></li>
 						<li><a href="{% url 'board_game:playercount' %}">PLayers</a></li>
 						<li><a href="{% url 'board_game:age' %}">Age</a></li>
 						<li><a href="{% url 'board_game:time' %}">Time</a></li>
@@ -168,7 +168,7 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
-
+{% block content %}
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -406,6 +406,7 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
+			{% endblock content %}
 		</div>
 		<!-- /SECTION -->
 		<!-- FOOTER -->
