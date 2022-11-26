@@ -29,6 +29,7 @@ class Game(models.Model):
 class Publisher(models.Model):
     publisher = models.CharField(max_length=100)
     slug = models.SlugField(max_length=10)
+    image = models.ImageField(null=True, upload_to="src/publishers/images", blank=True)
 
     def __str__(self):
         return self.publisher
