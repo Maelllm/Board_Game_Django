@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from .models import Game, Publisher, Series
+from .models import Game, Publisher, Series, AgeCategory
 
 
 class GetAllGamesView(ListView):
@@ -36,3 +36,20 @@ class GetSeriesGamesView(ListView):
         pk = self.kwargs.get("pk")
         queryset = Series.objects.get(pk=pk).game.all()
         return queryset
+
+
+class GetAgeCategoryGamesView(ListView):
+    model = AgeCategory
+    template_name = "age_cat_games.html"
+    context_object_name = "ac_games"
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        queryset = AgeCategory.objects.get(pk=pk).game.all()
+        return queryset
+
+
+class GetAllAgeCategoryView(ListView):
+    model = AgeCategory
+    template_name = "age_categories.html"
+    context_object_name = "age_categories"

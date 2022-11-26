@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.urls import path
 
 from board_game.views import (GetAllGamesView, GetAllPublishersView,
-                              GetPublisherSeriesView, GetSeriesGamesView)
+                              GetPublisherSeriesView, GetSeriesGamesView, GetAllAgeCategoryView,
+                              GetAgeCategoryGamesView)
 from core.views import PageNotFoundView
 
 app_name = "board_game"
@@ -15,7 +16,8 @@ urlpatterns = [
     path("publishers/<int:pk>", GetPublisherSeriesView.as_view(), name="publishers_series"),
     path("publishers/series/<int:pk>", GetSeriesGamesView.as_view(), name="series_games"),
     path("plct/", PageNotFoundView.as_view(), name="playercount"),
-    path("age/", PageNotFoundView.as_view(), name="age"),
+    path("age/", GetAllAgeCategoryView.as_view(), name="age_category"),
+    path("age/<int:pk>", GetAgeCategoryGamesView.as_view(), name="age_cat_games"),
     path("time/", PageNotFoundView.as_view(), name="time"),
 ]
 

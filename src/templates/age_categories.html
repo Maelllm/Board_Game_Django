@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1" >
+										<!-- product -->
+										{% for ac in age_categories %}
+										<div class="product">
+											<div class="product-body">
+												<p class="product-category">Age Categories</p>
+												<h3 class="product-name"><a href="{% url "board_game:age_cat_games" ac.pk %}">{{ ac.age_category}}</a></h3>
+<!--												<h4 class="product-price">{{ game.price}} </h4>-->
+											</div>
+										</div>
+										{% endfor %}
+										<!-- /product -->
+									</div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+
+{% endblock content %}
