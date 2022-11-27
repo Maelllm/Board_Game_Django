@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.generic import ListView
 
-from .models import Game, Publisher, Series, AgeCategory
+from .models import AgeCategory, Game, Publisher, Series
+from .tasks import generate_game, generate_order, generate_order_item
 
 
 class GetAllGamesView(ListView):
@@ -53,3 +54,18 @@ class GetAllAgeCategoryView(ListView):
     model = AgeCategory
     template_name = "age_categories.html"
     context_object_name = "age_categories"
+
+
+def game_gen_view(request):
+    generate_game.delay(amount=2)
+    return HttpResponse("Task is started")
+
+
+def order_gen_view(request):
+    generate_order.delay(amount=5)
+    return HttpResponse("Task is started")
+
+
+def order_item_gen_view(request):
+    generate_order_item.delay(amount=15)
+    return HttpResponse("Task is started")

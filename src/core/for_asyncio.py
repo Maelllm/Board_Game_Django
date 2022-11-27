@@ -1,7 +1,8 @@
-import aiohttp  # NOQA
 import asyncio
-import time
 import random
+import time
+
+import aiohttp  # NOQA
 
 start_time = time.time()
 
@@ -12,11 +13,11 @@ pokemon_list_2 = []
 async def async_pokemon(num_1, num_2):
     async with aiohttp.ClientSession() as session:
         for number in range(num_1, num_2):
-            print(f'Starting {number}')
-            pokemon_url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+            print(f"Starting {number}")
+            pokemon_url = f"https://pokeapi.co/api/v2/pokemon/{number}"
             async with session.get(pokemon_url) as resp:
                 pokemon = await resp.json()
-                pokemon_list_1.append(pokemon['name'])
+                pokemon_list_1.append(pokemon["name"])
 
 
 async def stop_event_loop(seconds):
@@ -42,11 +43,11 @@ async def async_pokemon_2(future):
     print("Gonna catch them all")
     async with aiohttp.ClientSession() as session:
         for number in range(random.randint(30, 40), random.randint(40, 50) + result):
-            print(f'Starting {number}')
-            pokemon_url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+            print(f"Starting {number}")
+            pokemon_url = f"https://pokeapi.co/api/v2/pokemon/{number}"
             async with session.get(pokemon_url) as resp:
                 pokemon = await resp.json()
-                pokemon_list_2.append(pokemon['name'])
+                pokemon_list_2.append(pokemon["name"])
         print("Victory")
 
 

@@ -155,7 +155,7 @@ class TestAPI(TestCase):
                     "series": 10,
                     "language": "English",
                     "description": "some",
-                    "image": None,
+                    "image": "http://testserver/media/images/default.webp",
                 },
             )
         else:
@@ -184,6 +184,6 @@ class TestAPI(TestCase):
                     "series": 1,
                     "language": "English",
                     "description": "some",
-                    "image": None,
+                    "image": "http://testserver/media/images/default.webp",
                 },
             )

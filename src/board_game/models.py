@@ -10,7 +10,7 @@ class Game(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, validators=[MinValueValidator(1.0)])
     language = models.CharField(max_length=20, null=True)
     description = models.TextField(max_length=2000, null=True)
-    image = models.ImageField(null=True, upload_to="src/media/images", blank=True)
+    image = models.ImageField(null=True, upload_to="src/media/images", blank=True, default="images/default.webp")
     series = models.ForeignKey(to="board_game.Series", related_name="game", on_delete=models.CASCADE)
     age_category = models.ForeignKey(to="board_game.AgeCategory", related_name="game", on_delete=models.CASCADE)
     player_count = models.ForeignKey(
