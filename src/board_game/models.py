@@ -10,7 +10,7 @@ class Game(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, validators=[MinValueValidator(1.0)])
     language = models.CharField(max_length=20, null=True)
     description = models.TextField(max_length=2000, null=True)
-    image = models.ImageField(null=True, upload_to="src/media/images", blank=True)
+    image = models.ImageField(null=True, upload_to="src/media/images", blank=True, default="images/default.webp")
     series = models.ForeignKey(to="board_game.Series", related_name="game", on_delete=models.CASCADE)
     age_category = models.ForeignKey(to="board_game.AgeCategory", related_name="game", on_delete=models.CASCADE)
     player_count = models.ForeignKey(
@@ -29,6 +29,7 @@ class Game(models.Model):
 class Publisher(models.Model):
     publisher = models.CharField(max_length=100)
     slug = models.SlugField(max_length=10)
+    image = models.ImageField(null=True, upload_to="src/publishers/images", blank=True)
 
     def __str__(self):
         return self.publisher

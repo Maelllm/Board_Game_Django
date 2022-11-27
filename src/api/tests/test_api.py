@@ -1,3 +1,4 @@
+import os
 from collections import OrderedDict
 from unittest import TestCase
 
@@ -6,7 +7,9 @@ from django.urls import reverse
 from rest_framework.status import HTTP_200_OK, HTTP_401_UNAUTHORIZED
 from rest_framework.test import APIClient
 
-from board_game.models import Game, Order, OrderItem
+from board_game.models import (AgeCategory, Game, Order, OrderItem,
+                               PLayerCountCategory, Publisher, Series,
+                               TimeCategory)
 from core.utils import sample_game, sample_order, sample_order_item
 
 
@@ -120,31 +123,67 @@ class TestAPI(TestCase):
         )
 
     def test_game_create_not_authorized(self):
-        result = self.client.post(
-            path=reverse("api:game_create"),
-            data={
-                "name": "apigame_created",
-                "price": 100,
-                "series": 1,
-                "age_category": 1,
-                "player_count": 1,
-                "time_spend": 1,
-                "language": "English",
-                "description": "some",
-            },
-        )
-        self.assertEqual(
-            result.data,
-            {
-                "id": 2,
-                "name": "apigame_created",
-                "price": "100.00",
-                "time_spend": 1,
-                "age_category": 1,
-                "player_count": 1,
-                "series": 1,
-                "language": "English",
-                "description": "some",
-                "image": None,
-            },
-        )
+        if os.environ.get("GITHUB_WORKFLOW"):
+            pub = Publisher.objects.create(publisher="1")
+            Series.objects.create(publisher=pub, series="1")
+            AgeCategory.objects.create(age_category="1")
+            TimeCategory.objects.create(time_spend="1")
+            PLayerCountCategory.objects.create(player_count="1")
+
+            result = self.client.post(
+                path=reverse("api:game_create"),
+                data={
+                    "name": "apigame_created",
+                    "price": 100,
+                    "series": 10,
+                    "age_category": 10,
+                    "player_count": 10,
+                    "time_spend": 10,
+                    "language": "English",
+                    "description": "some",
+                },
+            )
+            self.assertEqual(
+                result.data,
+                {
+                    "id": 7,
+                    "name": "apigame_created",
+                    "price": "100.00",
+                    "time_spend": 10,
+                    "age_category": 10,
+                    "player_count": 10,
+                    "series": 10,
+                    "language": "English",
+                    "description": "some",
+                    "image": "http://testserver/media/images/default.webp",
+                },
+            )
+        else:
+            result = self.client.post(
+                path=reverse("api:game_create"),
+                data={
+                    "name": "apigame_created",
+                    "price": 100,
+                    "series": 1,
+                    "age_category": 1,
+                    "player_count": 1,
+                    "time_spend": 1,
+                    "language": "English",
+                    "description": "some",
+                },
+            )
+            self.assertEqual(
+                result.data,
+                {
+                    "id": 2,
+                    "name": "apigame_created",
+                    "price": "100.00",
+                    "time_spend": 1,
+                    "age_category": 1,
+                    "player_count": 1,
+                    "series": 1,
+                    "language": "English",
+                    "description": "some",
+                    "image": "http://testserver/media/images/default.webp",
+                },
+            )

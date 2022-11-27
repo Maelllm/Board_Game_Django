@@ -1,9 +1,9 @@
 FROM python:3.10
 
 RUN apt update
-RUN mkdir /board_game_django
+RUN mkdir /Board_Game_Django
 
-WORKDIR /board_game_django
+WORKDIR /Board_Game_Django
 
 RUN mkdir /commands
 
